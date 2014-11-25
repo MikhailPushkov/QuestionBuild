@@ -164,5 +164,20 @@ namespace QuestBuild.DataAccess
                 context.SaveChanges();
             }
         }
+
+        public static void ChangeStudent(Students newStudent)
+        {
+            using(QuestBuildEntities context = new QuestBuildEntities())
+            {
+                Students student = (from stud in context.Students
+                                    where stud.ID_Student == newStudent.ID_Student
+                                    select stud).First();
+                student.Name = newStudent.Name;
+                student.Surname = newStudent.Surname;
+                student.Otchestvo = newStudent.Otchestvo;
+                student.ID_Group = newStudent.ID_Group;
+                context.SaveChanges();
+            }
+        }
     }
 }

@@ -21,6 +21,8 @@ namespace QuestBuild.AddWindows
     public partial class AddStudents : Window
     {
         Students student = new Students();
+        int change = 0;
+        string nameOfStudent;
 
         public AddStudents()
         {
@@ -37,6 +39,8 @@ namespace QuestBuild.AddWindows
             TextBox_Name.Text = fioOfStudent[1];
             TextBox_Surname.Text = fioOfStudent[0];
             TextBox_Otchestvo.Text = fioOfStudent[2];
+            nameOfStudent = student;
+            change = 1;
         }
 
         private void Button_AddGroup_Click(object sender, RoutedEventArgs e)
@@ -50,11 +54,22 @@ namespace QuestBuild.AddWindows
             if((TextBox_Surname.Text != string.Empty) && (TextBox_Name.Text != string.Empty) && 
                 (TextBox_Otchestvo.Text != string.Empty) && (Cb_Groups.Text != string.Empty))
             {
+                Int32 selectedGroup = Convert.ToInt32(Cb_Groups.Text.Remove(1, 3));
+                student.ID_Group = GetId.Group(selectedGroup);
                 student.Surname = TextBox_Surname.Text;
                 student.Name = TextBox_Name.Text;
                 student.Otchestvo = TextBox_Otchestvo.Text;
-                AddItem.Student(student);
-                MessageBox.Show("Студент успешно добавлен.");
+                if (change == 0)
+                {
+                    AddItem.Student(student);
+                    MessageBox.Show("Студент успешно добавлен.");
+                }
+                else
+                {
+                    student.ID_Student = GetId.Student(nameOfStudent);
+                    AddItem.ChangeStudent(student);
+                    MessageBox.Show("Студент успешно изменен");
+                }
                 TextBox_Surname.Clear();
                 TextBox_Name.Clear();
                 TextBox_Otchestvo.Clear();
@@ -62,15 +77,6 @@ namespace QuestBuild.AddWindows
             else
             {
                 MessageBox.Show("Не все поля заполнены.");
-            }
-        }
-
-        private void Cb_Groups_DropDownClosed(object sender, EventArgs e)
-        {
-            if(Cb_Groups.Text != string.Empty)
-            {
-                Int32 selectedGroup = Convert.ToInt32(Cb_Groups.Text.Remove(1, 3));
-                student.ID_Group = GetId.Group(selectedGroup);
             }
         }
 
