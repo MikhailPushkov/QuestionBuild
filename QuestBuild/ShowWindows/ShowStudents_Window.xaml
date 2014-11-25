@@ -1,0 +1,18 @@
+﻿<Window x:Class="QuestBuild.ShowWindows.ShowStudents_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ShowStudents_Window" Height="360" Width="600" Activated="Window_Activated">
+    <Grid>
+        <Label Content="Группа:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="Cb_Group" HorizontalAlignment="Left" Margin="66,14,0,0" VerticalAlignment="Top" Width="125" DropDownClosed="Cb_Group_DropDownClosed"/>
+        <DataGrid Name="Dg_Students" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Height="278" Width="470" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ФИО студента" Binding="{Binding fio}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="Button_AddStudents" Content="Добавить" HorizontalAlignment="Left" Margin="488,41,0,0" VerticalAlignment="Top" Width="94" Height="60" Click="Button_AddStudents_Click"/>
+        <Button x:Name="Button_Change" Content="Изменить" HorizontalAlignment="Left" Margin="488,106,0,0" VerticalAlignment="Top" Width="94" Height="60" Click="Button_Change_Click"/>
+        <Button x:Name="Button_Remove" Content="Удалить" HorizontalAlignment="Left" Margin="488,171,0,0" VerticalAlignment="Top" Width="94" Height="60" Click="Button_Remove_Click"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,11 @@
+﻿<Window x:Class="QuestBuild.AddWindows.AddSubject"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AddSubject" Height="129" Width="413">
+    <Grid>
+        <Label Content="Предмет:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="70"/>
+        <TextBox x:Name="TextBox_Subject" HorizontalAlignment="Left" Height="37" Margin="10,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266"/>
+        <Button x:Name="Button_SaveSubject" Content="Добавить" HorizontalAlignment="Left" Margin="281,41,0,0" VerticalAlignment="Top" Width="114" Height="37" Click="Button_SaveSubject_Click"/>
+
+    </Grid>
+</Window>

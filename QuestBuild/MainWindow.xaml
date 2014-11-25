@@ -1,0 +1,12 @@
+﻿<Window x:Class="QuestBuild.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="404" Width="597">
+    <Grid Margin="0,0,2,4">
+        <Button x:Name="AddQuest" Content="Add questions" HorizontalAlignment="Left" Margin="10,186,0,0" VerticalAlignment="Top" Width="250" Height="171" Click="AddQuest_Click"/>
+        <Button Content="Add Students" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="250" Height="171" Click="Button_Click"/>
+        <Button Content="Create Work" HorizontalAlignment="Left" Margin="265,10,0,0" VerticalAlignment="Top" Width="250" Height="171" Click="Button_Click_1"/>
+        <Button x:Name="Button_ShowQ" Content="Show Questions" HorizontalAlignment="Left" Margin="265,186,0,0" VerticalAlignment="Top" Width="250" Height="171" Click="Button_ShowQ_Click"/>
+
+    </Grid>
+</Window>

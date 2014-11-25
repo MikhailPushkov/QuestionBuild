@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QuestBuildModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <ComplexType Name="fnGetReports_Result">
+    <Property Name="ID_Temi" Type="Int32" Nullable="false" />
+    <Property Name="ID_Nad_Tema" Type="Int32" />
+  </ComplexType>
+  <ComplexType Name="fnGetTema_Result">
+    <Property Name="Nazvanie_Temi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </ComplexType>
+  <EntityType Name="Fakultet">
+    <Key>
+      <PropertyRef Name="ID_Faculteta" />
+    </Key>
+    <Property Name="ID_Faculteta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nazvanie_Fakulteta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Kafedra" Relationship="Self.R_20" FromRole="Fakultet" ToRole="Kafedra" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="ID_Group" />
+    </Key>
+    <Property Name="ID_Group" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Number_of_group" Type="Int32" />
+    <NavigationProperty Name="Students" Relationship="Self.R_12" FromRole="Groups" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="Kafedra">
+    <Key>
+      <PropertyRef Name="ID_Kafedri" />
+    </Key>
+    <Property Name="ID_Kafedri" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nazvanie_Kafedri" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ID_Faculteta" Type="Int32" />
+    <NavigationProperty Name="Fakultet" Relationship="Self.R_20" FromRole="Kafedra" ToRole="Fakultet" />
+    <NavigationProperty Name="Prepodavateli" Relationship="Self.R_19" FromRole="Kafedra" ToRole="Prepodavateli" />
+  </EntityType>
+  <EntityType Name="Otvet">
+    <Key>
+      <PropertyRef Name="ID_Otveta" />
+    </Key>
+    <Property Name="ID_Otveta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tekst_otveta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Pravilnost" Type="Boolean" />
+    <Property Name="ID_Voprosa" Type="Int32" />
+    <NavigationProperty Name="Vopros" Relationship="Self.R_17" FromRole="Otvet" ToRole="Vopros" />
+  </EntityType>
+  <EntityType Name="Predmet">
+    <Key>
+      <PropertyRef Name="ID_Predmeta" />
+    </Key>
+    <Property Name="ID_Predmeta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nazvanie_Predmeta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Tema" Relationship="Self.R_13" FromRole="Predmet" ToRole="Tema" />
+  </EntityType>
+  <EntityType Name="Prepodavateli">
+    <Key>
+      <PropertyRef Name="ID_Prepodavatelya" />
+    </Key>
+    <Property Name="ID_Prepodavatelya" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Otchestvo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ID_Kafedri" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Kafedra" Relationship="Self.R_19" FromRole="Prepodavateli" ToRole="Kafedra" />
+    <NavigationProperty Name="Vopros" Relationship="Self.R_21" FromRole="Prepodavateli" ToRole="Vopros" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="ID_Student" />
+    </Key>
+    <Property Name="ID_Student" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Otchestvo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ID_Group" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Groups" Relationship="Self.R_12" FromRole="Students" ToRole="Groups" />
+    <NavigationProperty Name="Zadanie" Relationship="Self.R_22" FromRole="Students" ToRole="Zadanie" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tema">
+    <Key>
+      <PropertyRef Name="ID_Temi" />
+    </Key>
+    <Property Name="ID_Temi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nazvanie_Temi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ID_Predmeta" Type="Int32" Nullable="false" />
+    <Property Name="ID_Nad_Tema" Type="Int32" />
+    <NavigationProperty Name="Predmet" Relationship="Self.R_13" FromRole="Tema" ToRole="Predmet" />
+    <NavigationProperty Name="Tema1" Relationship="Self.R_26" FromRole="Tema" ToRole="Tema1" />
+    <NavigationProperty Name="Tema2" Relationship="Self.R_26" FromRole="Tema1" ToRole="Tema" />
+    <NavigationProperty Name="Vopros" Relationship="Self.R_29" FromRole="Tema" ToRole="Vopros" />
+  </EntityType>
+  <EntityType Name="Tip_Voprosa">
+    <Key>
+      <PropertyRef Name="ID_Tipa" />
+    </Key>
+    <Property Name="ID_Tipa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tip" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Vopros" Relationship="Self.R_18" FromRole="Tip_Voprosa" ToRole="Vopros" />
+  </EntityType>
+  <EntityType Name="Vidi_Rabot">
+    <Key>
+      <PropertyRef Name="ID_Vida" />
+    </Key>
+    <Property Name="ID_Vida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nazvanie_Vida" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Zadanie" Relationship="Self.R_24" FromRole="Vidi_Rabot" ToRole="Zadanie" />
+  </EntityType>
+  <EntityType Name="Vopros">
+    <Key>
+      <PropertyRef Name="ID_Voprosa" />
+    </Key>
+    <Property Name="ID_Voprosa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tekst_Voprosa" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ID_Tipa" Type="Int32" Nullable="false" />
+    <Property Name="ID_Prepodavatelya" Type="Int32" Nullable="false" />
+    <Property Name="ID_Temi" Type="Int32" Nullable="false" />
+    <Property Name="Stoimost_Voprosa" Type="Int32" />
+    <NavigationProperty Name="Otvet" Relationship="Self.R_17" FromRole="Vopros" ToRole="Otvet" />
+    <NavigationProperty Name="Prepodavateli" Relationship="Self.R_21" FromRole="Vopros" ToRole="Prepodavateli" />
+    <NavigationProperty Name="Tema" Relationship="Self.R_29" FromRole="Vopros" ToRole="Tema" />
+    <NavigationProperty Name="Tip_Voprosa" Relationship="Self.R_18" FromRole="Vopros" ToRole="Tip_Voprosa" />
+    <NavigationProperty Name="Zadanie" Relationship="Self.Zadaniya_Voprosi" FromRole="Vopros" ToRole="Zadanie" />
+  </EntityType>
+  <EntityType Name="Zadanie">
+    <Key>
+      <PropertyRef Name="ID_Raboti" />
+    </Key>
+    <Property Name="ID_Raboti" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Kolichestvo_Voprosov" Type="Int32" />
+    <Property Name="Poluchennaya_Ocenka" Type="Int32" />
+    <Property Name="ID_Student" Type="Int32" Nullable="false" />
+    <Property Name="ID_Vida" Type="Int32" Nullable="false" />
+    <Property Name="Data_Sdachi" Type="DateTime" Precision="3" />
+    <Property Name="Stoimost_Raboti" Type="Int32" />
+    <Property Name="Data_Vidachi" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Students" Relationship="Self.R_22" FromRole="Zadanie" ToRole="Students" />
+    <NavigationProperty Name="Vidi_Rabot" Relationship="Self.R_24" FromRole="Zadanie" ToRole="Vidi_Rabot" />
+    <NavigationProperty Name="Vopros" Relationship="Self.Zadaniya_Voprosi" FromRole="Zadanie" ToRole="Vopros" />
+  </EntityType>
+  <Association Name="R_20">
+    <End Role="Fakultet" Type="Self.Fakultet" Multiplicity="0..1" />
+    <End Role="Kafedra" Type="Self.Kafedra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fakultet">
+        <PropertyRef Name="ID_Faculteta" />
+      </Principal>
+      <Dependent Role="Kafedra">
+        <PropertyRef Name="ID_Faculteta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_12">
+    <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+    <End Role="Students" Type="Self.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="ID_Group" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="ID_Group" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_19">
+    <End Role="Kafedra" Type="Self.Kafedra" Multiplicity="1" />
+    <End Role="Prepodavateli" Type="Self.Prepodavateli" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kafedra">
+        <PropertyRef Name="ID_Kafedri" />
+      </Principal>
+      <Dependent Role="Prepodavateli">
+        <PropertyRef Name="ID_Kafedri" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_17">
+    <End Role="Vopros" Type="Self.Vopros" Multiplicity="0..1" />
+    <End Role="Otvet" Type="Self.Otvet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vopros">
+        <PropertyRef Name="ID_Voprosa" />
+      </Principal>
+      <Dependent Role="Otvet">
+        <PropertyRef Name="ID_Voprosa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_13">
+    <End Role="Predmet" Type="Self.Predmet" Multiplicity="1" />
+    <End Role="Tema" Type="Self.Tema" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Predmet">
+        <PropertyRef Name="ID_Predmeta" />
+      </Principal>
+      <Dependent Role="Tema">
+        <PropertyRef Name="ID_Predmeta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_21">
+    <End Role="Prepodavateli" Type="Self.Prepodavateli" Multiplicity="1" />
+    <End Role="Vopros" Type="Self.Vopros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prepodavateli">
+        <PropertyRef Name="ID_Prepodavatelya" />
+      </Principal>
+      <Dependent Role="Vopros">
+        <PropertyRef Name="ID_Prepodavatelya" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_22">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="Zadanie" Type="Self.Zadanie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID_Student" />
+      </Principal>
+      <Dependent Role="Zadanie">
+        <PropertyRef Name="ID_Student" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_26">
+    <End Role="Tema" Type="Self.Tema" Multiplicity="0..1" />
+    <End Role="Tema1" Type="Self.Tema" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tema">
+        <PropertyRef Name="ID_Temi" />
+      </Principal>
+      <Dependent Role="Tema1">
+        <PropertyRef Name="ID_Nad_Tema" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_29">
+    <End Role="Tema" Type="Self.Tema" Multiplicity="1" />
+    <End Role="Vopros" Type="Self.Vopros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tema">
+        <PropertyRef Name="ID_Temi" />
+      </Principal>
+      <Dependent Role="Vopros">
+        <PropertyRef Name="ID_Temi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_18">
+    <End Role="Tip_Voprosa" Type="Self.Tip_Voprosa" Multiplicity="1" />
+    <End Role="Vopros" Type="Self.Vopros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tip_Voprosa">
+        <PropertyRef Name="ID_Tipa" />
+      </Principal>
+      <Dependent Role="Vopros">
+        <PropertyRef Name="ID_Tipa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_24">
+    <End Role="Vidi_Rabot" Type="Self.Vidi_Rabot" Multiplicity="1" />
+    <End Role="Zadanie" Type="Self.Zadanie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vidi_Rabot">
+        <PropertyRef Name="ID_Vida" />
+      </Principal>
+      <Dependent Role="Zadanie">
+        <PropertyRef Name="ID_Vida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Zadaniya_Voprosi">
+    <End Role="Vopros" Type="Self.Vopros" Multiplicity="*" />
+    <End Role="Zadanie" Type="Self.Zadanie" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="QuestBuildEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Fakultet" EntityType="Self.Fakultet" />
+    <EntitySet Name="Groups" EntityType="Self.Groups" />
+    <EntitySet Name="Kafedra" EntityType="Self.Kafedra" />
+    <EntitySet Name="Otvet" EntityType="Self.Otvet" />
+    <EntitySet Name="Predmet" EntityType="Self.Predmet" />
+    <EntitySet Name="Prepodavateli" EntityType="Self.Prepodavateli" />
+    <EntitySet Name="Students" EntityType="Self.Students" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Tema" EntityType="Self.Tema" />
+    <EntitySet Name="Tip_Voprosa" EntityType="Self.Tip_Voprosa" />
+    <EntitySet Name="Vidi_Rabot" EntityType="Self.Vidi_Rabot" />
+    <EntitySet Name="Vopros" EntityType="Self.Vopros" />
+    <EntitySet Name="Zadanie" EntityType="Self.Zadanie" />
+    <AssociationSet Name="R_20" Association="Self.R_20">
+      <End Role="Fakultet" EntitySet="Fakultet" />
+      <End Role="Kafedra" EntitySet="Kafedra" />
+    </AssociationSet>
+    <AssociationSet Name="R_12" Association="Self.R_12">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="R_19" Association="Self.R_19">
+      <End Role="Kafedra" EntitySet="Kafedra" />
+      <End Role="Prepodavateli" EntitySet="Prepodavateli" />
+    </AssociationSet>
+    <AssociationSet Name="R_17" Association="Self.R_17">
+      <End Role="Vopros" EntitySet="Vopros" />
+      <End Role="Otvet" EntitySet="Otvet" />
+    </AssociationSet>
+    <AssociationSet Name="R_13" Association="Self.R_13">
+      <End Role="Predmet" EntitySet="Predmet" />
+      <End Role="Tema" EntitySet="Tema" />
+    </AssociationSet>
+    <AssociationSet Name="R_21" Association="Self.R_21">
+      <End Role="Prepodavateli" EntitySet="Prepodavateli" />
+      <End Role="Vopros" EntitySet="Vopros" />
+    </AssociationSet>
+    <AssociationSet Name="R_22" Association="Self.R_22">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Zadanie" EntitySet="Zadanie" />
+    </AssociationSet>
+    <AssociationSet Name="R_26" Association="Self.R_26">
+      <End Role="Tema" EntitySet="Tema" />
+      <End Role="Tema1" EntitySet="Tema" />
+    </AssociationSet>
+    <AssociationSet Name="R_29" Association="Self.R_29">
+      <End Role="Tema" EntitySet="Tema" />
+      <End Role="Vopros" EntitySet="Vopros" />
+    </AssociationSet>
+    <AssociationSet Name="R_18" Association="Self.R_18">
+      <End Role="Tip_Voprosa" EntitySet="Tip_Voprosa" />
+      <End Role="Vopros" EntitySet="Vopros" />
+    </AssociationSet>
+    <AssociationSet Name="R_24" Association="Self.R_24">
+      <End Role="Vidi_Rabot" EntitySet="Vidi_Rabot" />
+      <End Role="Zadanie" EntitySet="Zadanie" />
+    </AssociationSet>
+    <AssociationSet Name="Zadaniya_Voprosi" Association="Self.Zadaniya_Voprosi">
+      <End Role="Vopros" EntitySet="Vopros" />
+      <End Role="Zadanie" EntitySet="Zadanie" />
+    </AssociationSet>
+    <FunctionImport Name="fnGetReports" ReturnType="Collection(QuestBuildModel.fnGetReports_Result)" IsComposable="true">
+      <Parameter Name="ID_Temi" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="fnGetTema" ReturnType="Collection(QuestBuildModel.fnGetTema_Result)" IsComposable="true">
+      <Parameter Name="N_Temi" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

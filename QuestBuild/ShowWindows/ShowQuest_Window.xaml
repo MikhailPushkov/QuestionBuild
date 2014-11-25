@@ -1,0 +1,37 @@
+﻿<Window x:Class="QuestBuild.ShowQuestWindows.ShowQuest_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ShowQuest_Window" Height="350" Width="600"
+        Loaded="Window_Loaded">
+    <Grid>
+        <DataGrid Name="Dg_Vopros" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Height="255" Width="470" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Преподаватель" Binding="{Binding prepodavatel}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Тип вопроса" Binding="{Binding tipVoprosa}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Вопрос" Binding="{Binding vopros}"></DataGridTextColumn>
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="0" Padding="10">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="18" Text="Ответы: " VerticalAlignment="Top" />
+                                <TextBlock FontSize="12" Foreground="MidnightBlue" Text="{Binding answers}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        <ComboBox x:Name="Cb_Teacher" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="200"/>
+        <ComboBox x:Name="Cb_Theme" HorizontalAlignment="Left" Margin="350,25,0,0" VerticalAlignment="Top" Width="130"/>
+        <Label Content="Преподаватель:" HorizontalAlignment="Left" Margin="10,-1,0,0" VerticalAlignment="Top" Width="161"/>
+        <Label Content="Тема:" HorizontalAlignment="Left" Margin="350,-1,0,0" VerticalAlignment="Top" Width="150"/>
+        <Button x:Name="Button_Done" Content="Показать" HorizontalAlignment="Left" Margin="485,52,0,0" VerticalAlignment="Top" Width="97" Height="60" Click="Button_Done_Click"/>
+        <ComboBox x:Name="Cb_Subject" HorizontalAlignment="Left" Margin="215,25,0,0" VerticalAlignment="Top" Width="130" DropDownClosed="Cb_Subject_DropDownClosed"/>
+        <Label Content="Предмет:" HorizontalAlignment="Left" Margin="215,0,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="Button_Change" Content="Изменить" HorizontalAlignment="Left" Margin="485,182,0,0" VerticalAlignment="Top" Width="97" Height="60" Click="Button_Change_Click"/>
+        <Button x:Name="Button_Delete" Content="Удалить" HorizontalAlignment="Left" Margin="485,247,0,0" VerticalAlignment="Top" Width="97" Height="60" Click="Button_Delete_Click"/>
+        <Button x:Name="Button_AddQuest" Content="Добавить" HorizontalAlignment="Left" Margin="485,117,0,0" VerticalAlignment="Top" Width="97" Height="60" Click="Button_AddQuest_Click"/>
+    </Grid>
+</Window>
